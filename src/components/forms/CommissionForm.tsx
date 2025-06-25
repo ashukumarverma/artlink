@@ -25,6 +25,7 @@ import {
 import { toast } from "sonner";
 import S3UploadImage from "@/components/upload/S3UploadImage";
 import { format } from "date-fns";
+import Image from "next/image"
 
 const formSchema = z.object({
   title: z.string().min(1, "Title is required"),
@@ -73,7 +74,7 @@ export default function CommissionForm({ onSuccess }: CommissionFormProps) {
       });
 
       if (!response.ok) {
-        throw new Error("Failed to create commission");
+        return new Error("Failed to create commission");
       }
 
       toast.success("Commission request created successfully");
@@ -255,8 +256,10 @@ export default function CommissionForm({ onSuccess }: CommissionFormProps) {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-2">
               {referenceImages.map((url, index) => (
                 <div key={index} className="relative aspect-square">
-                  <img
+                  <Image
                     src={url}
+                    width={100}
+                    height={100}
                     alt={`Reference ${index + 1}`}
                     className="object-cover rounded-lg w-full h-full"
                   />

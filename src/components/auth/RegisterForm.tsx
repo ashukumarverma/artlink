@@ -23,7 +23,7 @@ import {
 } from "@/components/ui/input-otp";
 import { Input } from "@/components/ui/input";
 import { RegisterSchema } from "@/lib/definitions";
-import { useState, useTransition } from "react";
+import { useState } from "react";
 import { register } from "@/actions/register";
 // import FormSuccess from "../FormSuccess";
 import FormError from "../FormError";

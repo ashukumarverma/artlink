@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { 
+    const {
       title,
       description,
       category,
@@ -61,10 +61,13 @@ export async function GET(req: Request) {
     const category = searchParams.get("category");
     const status = searchParams.get("status");
 
+    // Import your enums at the top if not already imported:
+    // import { CommissionCategory, CommissionStatus } from "@prisma/client";
+
     const commissions = await prisma.commission.findMany({
       where: {
-        ...(category ? { category } : {}),
-        ...(status ? { status } : {}),
+        ...(category ? { category: category as any } : {}),
+        ...(status ? { status: status as any } : {}),
         OR: [
           { clientId: session.user.id },
           { artistId: session.user.id },

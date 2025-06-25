@@ -62,7 +62,7 @@ export async function PATCH(
     }
 
     const body = await req.json();
-    const { name, description, price, stock, image } = body;
+    const { name, description, price, stock, images } = body;
 
     const product = await prisma.product.findUnique({
       where: { id: params.productId },
@@ -83,7 +83,7 @@ export async function PATCH(
         description,
         price,
         stock,
-        image,
+        images,
       },
     });
 

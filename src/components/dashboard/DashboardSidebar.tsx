@@ -12,7 +12,6 @@ import {
   LuSettings,
   LuTrendingUp,
   LuChevronRight,
-  LuDollarSign,
 } from "react-icons/lu";
 import { RxAvatar } from "react-icons/rx";
 // import { Button } from "@/components/ui/button";

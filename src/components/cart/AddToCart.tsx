@@ -28,7 +28,7 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
   const [quantity, setQuantity] = useState("1");
   const [isLoading, setIsLoading] = useState(false);
 
-  // Find if the product is already in cart
+  // Find if the product is already in the cart
   const existingCartItem = cartItems.find(item => item.productId === productId);
   const availableStock = stock - (existingCartItem?.quantity || 0);
 
@@ -78,7 +78,7 @@ const AddToCart = ({ productId, stock, price }: AddToCartProps) => {
     } catch (error) {
       toast({
         title: "Error",
-        description: "Failed to add item to cart",
+        description: `Failed to add item to cart - Error ${error}`,
         variant: "destructive",
       });
     } finally {
