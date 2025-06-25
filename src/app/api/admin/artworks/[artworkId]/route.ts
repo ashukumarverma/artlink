@@ -10,11 +10,15 @@ export async function PATCH(req: Request, { params }: { params: { artworkId: str
     }
 
     const { artworkId } = params;
+    if (!artworkId) {
+      return new NextResponse("Artwork ID is required", { status: 400 });
+    }
+
     const body = await req.json();
     const { status, rejectionReason } = body;
 
-    if (!artworkId || !status) {
-      return new NextResponse("Artwork ID and status are required", { status: 400 });
+    if (!status) {
+      return new NextResponse("Status is required", { status: 400 });
     }
 
     const artwork = await prisma.product.update({
@@ -26,9 +30,13 @@ export async function PATCH(req: Request, { params }: { params: { artworkId: str
       },
     });
 
+    if (!artwork) {
+      return new NextResponse("Artwork not found", { status: 404 });
+    }
+
     return NextResponse.json(artwork);
   } catch (error) {
     console.error("[ADMIN_ARTWORKS_UPDATE]", error);
     return new NextResponse("Internal Error", { status: 500 });
   }
-} 
+}
